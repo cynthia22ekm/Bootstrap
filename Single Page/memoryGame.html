@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="controller.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl" class="memory-game"> 
+    <div class="container">
+    <div class="vertical-center">
+    <button id="btnSubmit" type="button" class="btn btn-primary" ng-click="distribute()">Start Game</button>
+   <table class="outer">
+
+    <tr ng-repeat="i in range">
+        
+        <td>
+            <div ng-switch="firstcolumn">
+                <div ng-switch-when="true">
+            <img class="back-face" ng-src="{{((matchingimages[i]!=null))?matchingimages[i]:null}}"/>
+        </div>
+        <div ng-switch-when="false">
+            <img ng-hide="going" class="back-face" ng-src="{{backimages[i]}}"/>
+        </div>
+            </div>
+        
+        </td>
+       
+        <td data-ng-repeat="j in range">
+              <div ng-switch="numArray[(4*i)+j]">
+                
+                    <div ng-switch-when="2">
+                        <img ng-hide="remove" class="hidden-face" ng-src="{{displayimages[(4*i)+j]}}"/>
+                    
+                    </div>
+                    <div ng-switch-when="1">
+                        
+                         <img ng-click="frontturnover(this)" class="front-face" ng-src="{{frontimage}}"/>
+                         
+                    </div>
+                </div>
+                   
+                
+                </td>
+                
+               <td>
+                <div ng-switch="secondcolumn">
+                    <div ng-switch-when="true">
+                <img class="back-face" ng-src="{{((matchingimages[i+4]!=null))?matchingimages[i+4]:null}}" />
+            </div>
+            <div ng-switch-when="false">
+                <img ng-hide="going" class="back-face" ng-src="{{backimages[i+4]}}"/>
+            </div>
+                </div>
+                   
+                </td>
+    </tr>
+    </table>
+    </div>
+</div>
+</div>
+</body>
+</html>
